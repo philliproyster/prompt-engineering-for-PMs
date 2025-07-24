@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Infographic: Strategic Prompt Engineering at Procore</title>
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: A top-down, single-page scrollable infographic designed for a clear narrative flow. It starts with a high-impact header, followed by sections for "Why It Matters," "Core Best Practices," "Practical Applications," "Prompt Management," and "Key Recommendations." This structure was chosen to guide the user through the material logically, from the high-level "why" to the specific "how," making the dense information from the report easy to digest in a visual, story-like manner. Interactive cards and tabs are used to keep the user engaged and allow them to explore details without being overwhelmed. -->
+    <!-- Visualization & Content Choices: The infographic uses HTML and Tailwind CSS for all structural and visual elements, with vanilla JavaScript for interactivity, adhering to the NO SVG/Mermaid constraint. 'Why It Matters' uses large icons (Unicode) and text cards to 'Inform' and 'Compare' benefits. 'Core Best Practices' uses interactive cards that reveal 'before' and 'after' examples to 'Organize' and explain concepts. 'Practical Applications' uses a tabbed interface to 'Organize' information by product lifecycle stage. 'Prompt Management' uses a simple grid to 'Organize' key pillars. This approach makes the conceptual data from the report interactive and visually appealing. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'procore-purple': '#581845',
+                        'procore-dark-red': '#900C3F',
+                        'procore-red': '#C70039',
+                        'procore-orange': '#FF5733',
+                        'procore-yellow': '#FFC300',
+                        'procore-light-bg': '#FDF8F8',
+                        'procore-text-dark': '#3D1030',
+                        'procore-text-light': '#6D4F66',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F8;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab.active {
+            background-color: var(--tw-procore-orange);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .best-practice-card .back {
+            transform: rotateY(180deg);
+        }
+        .best-practice-card.flipped .front {
+            transform: rotateY(-180deg);
+        }
+        .best-practice-card.flipped .back {
+            transform: rotateY(0deg);
+        }
+        .best-practice-card .front, .best-practice-card .back {
+            backface-visibility: hidden;
+            transition: transform 0.6s ease;
+        }
+    </style>
+</head>
+<body class="bg-procore-light-bg text-procore-text-dark">
+    <div class="container mx-auto px-4 py-8 md:px-8 lg:px-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-procore-purple mb-4">Strategic Prompt Engineering</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-procore-dark-red mb-6">for Procore Financials</h2>
+            <p class="text-lg text-procore-text-light max-w-3xl mx-auto">An infographic on leveraging Google Gemini to enhance outcomes for the Product Management Team.</p>
+        </header>
+
+        <section id="why-it-matters" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-procore-purple text-center mb-12">Why It Matters for Procore PMs</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-yellow shadow-lg">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Outcomes-Driven PM</h3>
+                    <p class="text-procore-text-light">Transforms AI from a content factory into an outcomes accelerator, driving quantifiable business improvements.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-orange shadow-lg">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Enhancing Customer Focus</h3>
+                    <p class="text-procore-text-light">Scales empathy by accelerating analysis of customer feedback and synthesizing discovery insights.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-red shadow-lg">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Strengthening Strategic Thinking</h3>
+                    <p class="text-procore-text-light">AI acts as a sophisticated strategic sounding board for market analysis, competitive benchmarking, and scenario planning.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-dark-red shadow-lg">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Improving Execution</h3>
+                    <p class="text-procore-text-light">Supports "speed vs. precision" decision-making, enabling rapid, informed risk assessment and trade-off analysis.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-purple shadow-lg">
+                    <div class="text-4xl mb-4">🗣️</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Boosting Influence</h3>
+                    <p class="text-procore-text-light">AI acts as a "Chief Repeating Officer," amplifying influence and ensuring broad message penetration across the organization.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl border-t-4 border-procore-yellow shadow-lg">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Financial Domain Specifics</h3>
+                    <p class="text-procore-text-light">Ensures numerical accuracy and compliance by delegating calculations and embedding regulatory requirements in prompts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="best-practices" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-procore-purple text-center mb-12">How To Do It: Core Best Practices</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="best-practice-card" style="perspective: 1000px;">
+                    <div class="front relative w-full h-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-procore-orange">
+                        <h3 class="text-xl font-bold text-procore-purple mb-3">Clarity, Specificity, Context</h3>
+                        <p class="text-procore-text-light text-sm">Provide clear, specific, and context-rich prompts. Avoid ambiguity.</p>
+                        <button class="absolute bottom-4 right-4 text-procore-orange font-bold text-sm">Flip for Example</button>
+                    </div>
+                    <div class="back absolute w-full h-full bg-procore-purple p-6 rounded-xl shadow-lg text-white top-0 left-0">
+                        <h4 class="font-bold mb-2">Example:</h4>
+                        <p class="text-xs"><strong class="text-procore-yellow">Instead of:</strong> "Summarize financial report."</p>
+                        <p class="text-xs mt-2"><strong class="text-procore-yellow">Try:</strong> "Act as a Senior PM... summarize the Q4 2023 financial report focusing on revenue, expenses, and profitability... for an executive audience..."</p>
+                        <button class="absolute bottom-4 right-4 text-procore-yellow font-bold text-sm">Flip Back</button>
+                    </div>
+                </div>
+                <div class="best-practice-card" style="perspective: 1000px;">
+                    <div class="front relative w-full h-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-procore-red">
+                        <h3 class="text-xl font-bold text-procore-purple mb-3">Iterative Refinement</h3>
+                        <p class="text-procore-text-light text-sm">Start with a simple prompt, review the output, and refine it with more detail.</p>
+                        <button class="absolute bottom-4 right-4 text-procore-red font-bold text-sm">Flip for Example</button>
+                    </div>
+                    <div class="back absolute w-full h-full bg-procore-purple p-6 rounded-xl shadow-lg text-white top-0 left-0">
+                        <h4 class="font-bold mb-2">Example:</h4>
+                        <p class="text-xs"><strong class="text-procore-yellow">Initial:</strong> "Generate user stories for expense tracking."</p>
+                        <p class="text-xs mt-2"><strong class="text-procore-yellow">Refinement:</strong> "Generate user stories for expense tracking... for construction site supervisors... including their current pain points and acceptance criteria for mobile receipt capture."</p>
+                        <button class="absolute bottom-4 right-4 text-procore-yellow font-bold text-sm">Flip Back</button>
+                    </div>
+                </div>
+                <div class="best-practice-card" style="perspective: 1000px;">
+                    <div class="front relative w-full h-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-procore-dark-red">
+                        <h3 class="text-xl font-bold text-procore-purple mb-3">Role-Based Prompting</h3>
+                        <p class="text-procore-text-light text-sm">Instruct the model to "Act as a [role]" to adopt a specific perspective and tone.</p>
+                        <button class="absolute bottom-4 right-4 text-procore-dark-red font-bold text-sm">Flip for Example</button>
+                    </div>
+                    <div class="back absolute w-full h-full bg-procore-purple p-6 rounded-xl shadow-lg text-white top-0 left-0">
+                        <h4 class="font-bold mb-2">Example:</h4>
+                        <p class="text-xs"><strong class="text-procore-yellow">Instead of:</strong> "Write a marketing email."</p>
+                        <p class="text-xs mt-2"><strong class="text-procore-yellow">Try:</strong> "Act as a Product Marketing Manager specializing in construction accounting... Draft a compelling email to mid-market general contractors... Emphasize a 30% reduction in manual reconciliation time..."</p>
+                        <button class="absolute bottom-4 right-4 text-procore-yellow font-bold text-sm">Flip Back</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="applications" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-procore-purple text-center mb-12">Practical Applications Across the Product Lifecycle</h2>
+            <div class="bg-white rounded-xl border border-procore-gray-border shadow-lg">
+                <div class="p-4 flex flex-wrap justify-center gap-2 rounded-t-xl bg-procore-purple/5">
+                    <button class="tab px-4 py-2 text-sm font-semibold rounded-full active" data-tab="0">Discovery & Research</button>
+                    <button class="tab px-4 py-2 text-sm font-semibold rounded-full" data-tab="1">Requirements & Roadmap</button>
+                    <button class="tab px-4 py-2 text-sm font-semibold rounded-full" data-tab="2">GTM & Launch</button>
+                    <button class="tab px-4 py-2 text-sm font-semibold rounded-full" data-tab="3">Communication</button>
+                </div>
+                <div class="p-8">
+                    <div class="tab-content active" id="tab-0">
+                        <h4 class="font-bold text-xl text-procore-purple mb-2">Enhancing Discovery & Research</h4>
+                        <p class="text-procore-text-light mb-4">Accelerate understanding of customer pain points and market opportunities.</p>
+                        <ul class="list-disc list-inside space-y-2 text-procore-text-light">
+                            <li>Synthesize customer feedback from Gong & NotebookLM to identify recurring themes and pain points.</li>
+                            <li>Identify emerging market opportunities based on economic forecasts.</li>
+                            <li>Perform competitive analysis by comparing product launches, pricing, and features.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="tab-1">
+                        <h4 class="font-bold text-xl text-procore-purple mb-2">Streamlining Requirements & Roadmap</h4>
+                        <p class="text-procore-text-light mb-4">Draft initial requirements, refine user stories, and break down large initiatives.</p>
+                        <ul class="list-disc list-inside space-y-2 text-procore-text-light">
+                            <li>Generate JIRA-ready user stories with personas, actions, benefits, and acceptance criteria.</li>
+                            <li>Refine requirements to be SMART (Specific, Measurable, Achievable, Relevant, Time-bound).</li>
+                            <li>Propose high-level, phased roadmaps for strategic objectives with clear customer value.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="tab-2">
+                        <h4 class="font-bold text-xl text-procore-purple mb-2">Optimizing GTM & Launch</h4>
+                        <p class="text-procore-text-light mb-4">Create compelling marketing collateral and internal enablement materials.</p>
+                        <ul class="list-disc list-inside space-y-2 text-procore-text-light">
+                            <li>Draft GTM strategies including target personas, value propositions, and marketing channels.</li>
+                            <li>Generate sales enablement content like talking points and objection handling for Salesforce.</li>
+                            <li>Draft concise, customer-facing announcements for new feature releases on Slack.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="tab-3">
+                        <h4 class="font-bold text-xl text-procore-purple mb-2">Streamlining Communication</h4>
+                        <p class="text-procore-text-light mb-4">Facilitate cross-functional alignment and ensure shared understanding.</p>
+                        <ul class="list-disc list-inside space-y-2 text-procore-text-light">
+                            <li>Summarize meeting decisions and action items for Slack and JIRA.</li>
+                            <li>Draft concise, high-level updates for executive leadership on project progress and impact.</li>
+                            <li>Create inspiring messages for engineering and UX teams to connect their work to strategic outcomes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="management" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-procore-purple text-center mb-12">Prompt Management: Ensuring Consistency & Improvement</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-procore-orange text-5xl mb-4">🗄️</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Centralized Repository</h3>
+                    <p class="text-procore-text-light text-sm">A single source of truth for team-approved prompts (e.g., NotebookLM, PromptDrive).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-procore-red text-5xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Version Control</h3>
+                    <p class="text-procore-text-light text-sm">Track changes and safely experiment with prompt versions (e.g., PromptLayer, Git).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-procore-dark-red text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Collaboration</h3>
+                    <p class="text-procore-text-light text-sm">Establish processes for team feedback and continuous improvement (e.g., Google Docs, Slack).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-procore-purple text-5xl mb-4">🔗</div>
+                    <h3 class="text-xl font-bold text-procore-purple mb-2">Integration</h3>
+                    <p class="text-procore-text-light text-sm">Connect prompt systems with existing tools (JIRA, Salesforce, Gong) for actionable outputs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendations" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-procore-purple text-center mb-12">Key Recommendations</h2>
+            <div class="space-y-4 max-w-4xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-procore-yellow text-white text-xl font-bold rounded-full flex items-center justify-center">1</div>
+                    <p class="text-procore-text-dark"><strong>Establish a Centralized Prompt Library:</strong> Create a shared, version-controlled repository for reusable prompts.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-procore-orange text-white text-xl font-bold rounded-full flex items-center justify-center">2</div>
+                    <p class="text-procore-text-dark"><strong>Mandate "AI-as-Calculator":</strong> For financials, instruct AI to write and execute code for all precise calculations.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-procore-red text-white text-xl font-bold rounded-full flex items-center justify-center">3</div>
+                    <p class="text-procore-text-dark"><strong>Integrate into Workflows:</strong> Embed prompt engineering into daily tools like JIRA, Salesforce, and Slack.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-procore-dark-red text-white text-xl font-bold rounded-full flex items-center justify-center">4</div>
+                    <p class="text-procore-text-dark"><strong>Cultivate a "Compliance-by-Design" Mindset:</strong> Train PMs to proactively include regulatory requirements in prompts.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-procore-purple text-white text-xl font-bold rounded-full flex items-center justify-center">5</div>
+                    <p class="text-procore-text-dark"><strong>Foster Iterative Experimentation:</strong> Encourage continuous prompt refinement and establish feedback loops.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bestPracticeCards = document.querySelectorAll('.best-practice-card');
+            bestPracticeCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+            });
+
+            const tabs = document.querySelectorAll('#applications .tab');
+            const tabContents = document.querySelectorAll('#applications .tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
